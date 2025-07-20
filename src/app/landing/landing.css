@@ -1,0 +1,52 @@
+.landing-container {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: auto;
+
+  h1 {
+    font-size: 3rem;
+    .highlight {
+      color: #3f51b5;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #555;
+  }
+
+  .cta {
+    margin-bottom: 40px;
+    button {
+      margin: 0 10px;
+    }
+  }
+
+  .features {
+    text-align: left;
+    margin-top: 60px;
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      font-size: 1.1rem;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  footer {
+    margin-top: 60px;
+    color: #888;
+    font-size: 0.9rem;
+  }
+}

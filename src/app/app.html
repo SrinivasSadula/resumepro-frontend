@@ -1,0 +1,20 @@
+<!-- Common header -->
+<header class="app-header">
+  <div class="header-content">
+    <h1 class="logo">ResumePro</h1>
+    <nav class="nav-links">
+      <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
+      <a *ngIf="!isLoggedIn" routerLink="/signup" routerLinkActive="active">Sign Up</a>
+      <a *ngIf="isLoggedIn" (click)="logout()" class="logout-link">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<router-outlet></router-outlet>
+
+<!-- Common footer -->
+<footer class="app-footer">
+  <div class="footer-content">
+    <span>&copy; 2025 ResumePro. All rights reserved.</span>
+  </div>
+</footer>

@@ -1,0 +1,33 @@
+<!-- Modern centered resume UI with transparent card and grid system -->
+<div class="resume-bg">
+  <div class="resume-container">
+    <mat-card class="resume-card">
+      <div class="resume-grid">
+        <div class="resume-header">
+          <h2>Build Your Resume</h2>
+        </div>
+        <form (submit)="save()" class="resume-form">
+          <mat-form-field appearance="outline" >
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="name" name="name" required />
+          </mat-form-field>
+          <mat-form-field appearance="outline" >
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="email" name="email" required />
+          </mat-form-field>
+          <mat-form-field appearance="outline" >
+            <mat-label>Summary</mat-label>
+            <textarea matInput [(ngModel)]="summary" name="summary" rows="3"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline" >
+            <mat-label>Skills (comma separated)</mat-label>
+            <input matInput [(ngModel)]="skills" name="skills" />
+          </mat-form-field>
+          <button mat-button type="submit" class="resume-btn">Save Resume</button>
+        </form>
+        <p class="success" *ngIf="success">{{ success }}</p>
+        <p class="error" *ngIf="error">{{ error }}</p>
+      </div>
+    </mat-card>
+  </div>
+</div>

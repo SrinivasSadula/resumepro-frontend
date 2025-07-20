@@ -1,0 +1,8 @@
+<div class="payment-container">
+  <h2>Upgrade to Premium</h2>
+  <p>Unlock PDF downloads, premium templates, and more.</p>
+  <button mat-raised-button color="accent" (click)="payNow()" [disabled]="isPaying">
+    {{ isPaying ? 'Processing...' : 'Pay ₹99 Now' }}
+  </button>
+  <p *ngIf="message">{{ message }}</p>
+</div>

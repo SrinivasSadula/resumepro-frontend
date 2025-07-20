@@ -1,0 +1,124 @@
+/* Cleaned up login UI CSS, removed unused animation and redundant code */
+.login-bg {
+  position: relative;
+  min-height: 85vh;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resume-svg-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 85vh;
+  z-index: 0;
+  overflow: hidden;
+}
+.resume-svg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 350px;
+  max-width: 90vw;
+  transition: box-shadow 0.3s, transform 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.login-card:hover, .login-card:focus-within {
+  box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.25);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.login-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-header h2 {
+  text-align: center;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.login-btn {
+  background: transparent;
+  color: #2575fc;
+  border: 2px solid #2575fc;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+  box-shadow: none;
+  width: 100%;
+  font-weight: 600;
+  letter-spacing: 1px;
+  height: 48px; /* Increased height */
+  font-size: 1.1rem;
+}
+.login-btn:hover, .login-btn:focus {
+  background: #2575fc;
+  color: #fff;
+  border-color: #2575fc;
+}
+
+.login-footer {
+  text-align: center;
+  color: #333;
+}
+
+.login-footer a {
+  color: #6a11cb;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Error message styling */
+.login-error {
+  color: #e53935;
+  background: #fff3f3;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 0.98rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(229,57,53,0.08);
+}
+
+@media (max-width: 500px) {
+  .login-card {
+    padding: 1.5rem 0.5rem;
+    width: 95vw;
+  }
+}

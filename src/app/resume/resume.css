@@ -1,0 +1,102 @@
+/* Modern resume UI with transparent card and grid system */
+.resume-bg {
+  position: relative;
+  min-height: 85vh;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resume-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.resume-card {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+  border-radius: 20px;
+  padding: 2rem 1.2rem;
+  width: 600px;
+  max-width: 98vw;
+  transition: box-shadow 0.3s, transform 0.3s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.resume-card:hover, .resume-card:focus-within {
+  box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.25);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.resume-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.resume-header h2 {
+  text-align: center;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.resume-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.resume-form .form-group {
+  flex: 1 1 45%;
+  min-width: 220px;
+  margin-bottom: 0.7rem;
+}
+
+
+
+.resume-btn {
+  background: transparent;
+  color: #2575fc;
+  border: 2px solid #2575fc;
+  border-radius: 8px;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+  box-shadow: none;
+  width: 100%;
+  font-weight: 600;
+  letter-spacing: 1px;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+.resume-btn:hover, .resume-btn:focus {
+  background: #2575fc;
+  color: #fff;
+  border-color: #2575fc;
+}
+
+.success {
+  color: green;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .resume-card {
+    padding: 1.2rem 0.5rem;
+    width: 95vw;
+  }
+}
