@@ -116,6 +116,20 @@
   box-shadow: 0 2px 8px rgba(229,57,53,0.08);
 }
 
+/* Reduce eye icon size in password field */
+.mat-form-field .mat-icon-button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+
+.mat-form-field .mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
 @media (max-width: 500px) {
   .login-card {
     padding: 1.5rem 0.5rem;

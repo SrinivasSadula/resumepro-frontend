@@ -36,7 +36,10 @@
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Password</mat-label>
-            <input matInput formControlName="password" type="password" required />
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required />
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button" tabindex="-1">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
             <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
               Password is required.
             </mat-error>

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-signup',
@@ -16,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     RouterLink,
+    MatIcon,
     MatCard],
   templateUrl: './signup.html',
   styleUrl: './signup.css'
@@ -24,6 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class Signup implements OnInit {
   signupForm!: FormGroup;
   loading = false;
+  hidePassword = true;
   constructor(
     private fb: FormBuilder,
     private authService: Auth,
@@ -43,11 +46,14 @@ export class Signup implements OnInit {
       this.authService.signup(this.signupForm.value).subscribe({
         next: (res:any) => {
           this.authService.saveToken(res.token);
-          this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
+          this.snackBar.open('Signup successful', 'Close', { duration: 3000 });
           this.router.navigate(['/resume']);
           this.loading = false;
         },
-        error: err => alert(err.error.message)
+        error: (err) => {
+          this.snackBar.open(err.error.message || 'Signup failed', 'Close', { duration: 3000 });
+          this.loading = false;
+        }
       });
     }
   }

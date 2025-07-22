@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { PaymentService } from './payment-service';
 import { CommonModule } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 declare var Razorpay: any;
 
 @Component({
   selector: 'app-payment',
-  imports: [CommonModule],
+  imports: [CommonModule,MatButton],
   templateUrl: './payment.html',
   styleUrl: './payment.css'
 })

@@ -8,6 +8,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatCard } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatCard,
     RouterLink,
     FormsModule,
+    MatIcon,
     ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
@@ -24,6 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class Login implements OnInit{
   loginForm!: FormGroup;
   loading = false;
+  hidePassword = true;
   constructor(
     private fb: FormBuilder,
     private auth: Auth,
