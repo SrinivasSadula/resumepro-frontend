@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-  private api = 'http://localhost:5000/api/auth'; // change if deployed
+  private api = 'https://resumepro-backend-production.up.railway.app/'+ 'api/auth'; // change if deployed
    //private baseUrl = 'http://localhost:5000/api/auth';
   private tokenKey = 'resumepro_token';
   private premiumStatus = new BehaviorSubject<boolean>(false);
