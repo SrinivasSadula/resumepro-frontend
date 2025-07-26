@@ -1,5 +1,12 @@
 <!-- Modern centered signup UI with static resume-themed SVG background and grid system -->
 <div class="signup-bg">
+    <div *ngIf="loading" class="custom-backdrop">
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate"
+      diameter="60">
+    </mat-progress-spinner>
+  </div>
   <div class="resume-svg-bg">
     <svg width="100%" height="100%" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg" class="resume-svg">
       <g>

@@ -9,6 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatCard } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIcon } from '@angular/material/icon';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ import { MatIcon } from '@angular/material/icon';
     RouterLink,
     FormsModule,
     MatIcon,
+    MatSpinner,
     ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'

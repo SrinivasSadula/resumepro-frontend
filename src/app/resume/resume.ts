@@ -47,6 +47,7 @@ export class Resume {
         this.error = '';
       },
       error: err => {
+        this.loading = false;
         this.error = err.error.message || 'Failed to save resume';
         this.success = '';
       }

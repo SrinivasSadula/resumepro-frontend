@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIcon } from '@angular/material/icon';
+import { MatSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-signup',
@@ -17,6 +18,7 @@ import { MatIcon } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     RouterLink,
+    MatSpinner,
     MatIcon,
     MatCard],
   templateUrl: './signup.html',
@@ -43,6 +45,7 @@ export class Signup implements OnInit {
   }
    signup() {
     if (this.signupForm.valid) {
+      this.loading = true;
       this.authService.signup(this.signupForm.value).subscribe({
         next: (res:any) => {
           this.authService.saveToken(res.token);
