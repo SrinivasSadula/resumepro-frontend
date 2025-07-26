@@ -10,8 +10,8 @@
 .landing-container {
   position: relative;
   z-index: 1;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 10px;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
   border-radius: 20px;
@@ -30,25 +30,25 @@
 
   p {
     font-size: 1.2rem;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     color: #555;
   }
 
   .cta {
     display: flex;
     gap: 1.5rem;
-    margin: 2rem 0 1.5rem 0;
+    margin: 1rem 0 1rem 0;
   }
 
   .features {
     width: 100%;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     text-align: left;
 
     h2 {
       text-align: center;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     ul {
@@ -59,7 +59,7 @@
 
       li {
         font-size: 1.1rem;
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
       }
