@@ -1,7 +1,10 @@
 <!-- Common header -->
 <header class="app-header">
   <div class="header-content">
-    <h1 class="logo">ResumePro</h1>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo" style="height:28px;vertical-align:middle;margin-right:10px;border-radius: 8px;">
+      <span style="color:#fff; font-weight:700; font-size:1.7rem; vertical-align:middle;">ResumePro</span>
+    </div>
     <nav class="nav-links">
       <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
       <a *ngIf="!isLoggedIn" routerLink="/signup" routerLinkActive="active">Sign Up</a>
@@ -15,6 +18,6 @@
 <!-- Common footer -->
 <footer class="app-footer">
   <div class="footer-content">
-    <span>&copy; 2025 ResumePro. All rights reserved. || version - {{version}}</span>
+    <span>&copy; 2025 ResumePro. All rights reserved. | Version - {{version}}</span>
   </div>
 </footer>
