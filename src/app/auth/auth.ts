@@ -7,19 +7,19 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-  private api = 'https://resumepro-backend-production.up.railway.app/'+ 'api/auth'; // change if deployed
-   //private baseUrl = 'http://localhost:5000/api/auth';
+  private api = 'https://resumepro-backend-production.up.railway.app/' + 'api/auth'; // change if deployed
+  //private baseUrl = 'http://localhost:5000/api/auth';
   private tokenKey = 'resumepro_token';
   private premiumStatus = new BehaviorSubject<boolean>(false);
 
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
-  login(data:any) {
+  login(data: any) {
     return this.http.post<{ token: string }>(`${this.api}/login`, data);
   }
 
-  signup(data:any) {
+  signup(data: any) {
     return this.http.post<{ token: string }>(`${this.api}/signup`, data);
   }
 
@@ -29,7 +29,7 @@ export class Auth {
     this.router.navigate(['/login']);
   }
 
-   saveToken(token: string) {
+  saveToken(token: string) {
     localStorage.setItem(this.tokenKey, token);
     const decoded = JSON.parse(atob(token.split('.')[1]));
     this.premiumStatus.next(decoded.isPremium);
@@ -43,8 +43,17 @@ export class Auth {
     return !!this.getToken();
   }
 
-   isPremiumUser() {
-    return this.premiumStatus.asObservable();
+   setPremium(status:boolean) {
+    this.premiumStatus.next(status);
+    }
+  isPremiumUser(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    console.log('Checking premium status from token:', token);
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    console.log('Decoded payload:', payload);
+    return payload.isPremium;
   }
+
 
 }

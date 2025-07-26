@@ -1,52 +1,84 @@
 <!-- Modern centered resume UI with transparent card and grid system -->
 <div class="resume-bg">
   <div *ngIf="loading" class="custom-backdrop">
-    <mat-progress-spinner
-      color="primary"
-      mode="indeterminate"
-      diameter="60">
+    <mat-progress-spinner color="primary" mode="indeterminate" diameter="60">
     </mat-progress-spinner>
   </div>
   <div class="resume-container">
-    <mat-card class="resume-card">
-      <div class="resume-grid">
-        <div class="resume-header">
-          <h2>Build Your Resume</h2>
-        </div>
-        <form #resumeForm="ngForm" (ngSubmit)="save()" class="resume-form" novalidate>
-          <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]="name" name="name" required #nameCtrl="ngModel" />
-            <mat-error *ngIf="nameCtrl.invalid && nameCtrl.touched">
-              Name is required.
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="email" name="email" required email #emailCtrl="ngModel" />
-            <mat-error *ngIf="emailCtrl.invalid && emailCtrl.touched">
-              Please enter a valid email address.
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Summary</mat-label>
-            <textarea matInput [(ngModel)]="summary" name="summary" rows="3" required #summaryCtrl="ngModel"></textarea>
-            <mat-error *ngIf="summaryCtrl.invalid && summaryCtrl.touched">
-              Summary is required.
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Skills (comma separated)</mat-label>
-            <input matInput [(ngModel)]="skills" name="skills" required #skillsCtrl="ngModel" />
-            <mat-error *ngIf="skillsCtrl.invalid && skillsCtrl.touched">
-              Skills are required.
-            </mat-error>
-          </mat-form-field>
-          <button mat-button type="submit" class="resume-btn" [disabled]="resumeForm.invalid">Save Resume</button>
-        </form>
-        <p class="success" *ngIf="success">{{ success }}</p>
-        <p class="error" *ngIf="error">{{ error }}</p>
+    <!-- <mat-card class="resume-card"> -->
+    <div class="resume-grid">
+      <div class="resume-header">
+        <h2>Build Your Resume</h2>
       </div>
-    </mat-card>
+      <form #resumeForm="ngForm" (ngSubmit)="saveResume()" class="resume-form" novalidate>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput [(ngModel)]="resumeData.name" name="name" required #nameCtrl="ngModel" />
+          <mat-error *ngIf="nameCtrl.invalid && nameCtrl.touched">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput [(ngModel)]="resumeData.email" name="email" required email #emailCtrl="ngModel" />
+          <mat-error *ngIf="emailCtrl.invalid && emailCtrl.touched">
+            Please enter a valid email address.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone</mat-label>
+          <input matInput [(ngModel)]="resumeData.phone" name="phone" required pattern="^[6-9][0-9]{9}$"
+            #phoneCtrl="ngModel" maxlength="10"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
+          <mat-error *ngIf="phoneCtrl.invalid && phoneCtrl.touched">
+            Please enter a valid mobile number.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Summary</mat-label>
+          <textarea matInput [(ngModel)]="resumeData.summary" name="summary" required #summaryCtrl="ngModel"></textarea>
+          <mat-error *ngIf="summaryCtrl.invalid && summaryCtrl.touched">
+            Summary is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Education</mat-label>
+          <textarea matInput [(ngModel)]="resumeData.education" name="education" required
+            #educationCtrl="ngModel"></textarea>
+          <mat-error *ngIf="educationCtrl.invalid && educationCtrl.touched">
+            Education is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Experience</mat-label>
+          <textarea matInput [(ngModel)]="resumeData.experience" name="experience" required
+            #experienceCtrl="ngModel"></textarea>
+          <mat-error *ngIf="experienceCtrl.invalid && experienceCtrl.touched">
+            Experience is required.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="actions full-width">
+          <button mat-raised-button color="primary" type="submit" class="resume-btn" [disabled]="resumeForm.invalid">
+            Save Resume
+          </button>
+          <button mat-raised-button color="accent" type="button" class="resume-btn" (click)="downloadPdf()">
+            Download PDF
+          </button>
+          <button mat-raised-button color="primary" type="button" class="resume-btn" (click)="payAndUnlockPremium()" *ngIf="!premiumStatus">
+            Unlock Premium (₹99)
+          </button>
+        </div>
+      </form>
+      <p class="success" *ngIf="success">{{ success }}</p>
+      <p class="error" *ngIf="error">{{ error }}</p>
+    </div>
+    <!-- </mat-card> -->
+
   </div>
 </div>
