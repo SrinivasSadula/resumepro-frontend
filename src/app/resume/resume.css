@@ -60,7 +60,19 @@
   margin-bottom: 0.7rem;
 }
 
-
+.custom-backdrop {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.snackbar-success {
+  background: #43a047 !important;
+  color: #fff !important;
+}
 
 .resume-btn {
   background: transparent;
