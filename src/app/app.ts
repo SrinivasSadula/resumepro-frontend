@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { Auth } from './auth/auth';
 import { version } from '../../package.json'; // Adjust the path as necessary to import version from package.json
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterLink,RouterLinkActive,CommonModule],
+  imports: [RouterOutlet,CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

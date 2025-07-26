@@ -6,8 +6,8 @@
       <span style="color:#fff; font-weight:700; font-size:1.7rem; vertical-align:middle;">ResumePro</span>
     </div>
     <nav class="nav-links">
-      <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
-      <a *ngIf="!isLoggedIn" routerLink="/signup" routerLinkActive="active">Sign Up</a>
+      <!-- <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
+      <a *ngIf="!isLoggedIn" routerLink="/signup" routerLinkActive="active">Sign Up</a> -->
       <a *ngIf="isLoggedIn" (click)="logout()" class="logout-link">Logout</a>
     </nav>
   </div>
