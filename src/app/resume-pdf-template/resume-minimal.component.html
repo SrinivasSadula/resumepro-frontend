@@ -1,0 +1,80 @@
+<!-- resume-minimal.component.html -->
+ <button mat-icon-button class="close-btn" (click)="dialogRef.close()" style="position:absolute;top:12px;right:12px;">
+  <mat-icon>close</mat-icon>
+</button>
+<button mat-raised-button color="primary" style="position:absolute;top:12px;right:60px;" (click)="downloadResumePDF()">
+  <mat-icon>download</mat-icon> Download PDF
+</button>
+<div class="minimal-resume" id="selectedResume">
+  <h1>{{ resume.name }}</h1>
+  <div class="info">
+    {{ resume.email }} | {{ resume.phone }}<br />
+    {{ resume.address }}
+  </div>
+
+  <section *ngIf="resume.summary">
+    <h2>Summary</h2>
+    <p>{{ resume.summary }}</p>
+  </section>
+
+  <section *ngIf="resume.education?.length">
+    <h2>Education</h2>
+    <table mat-table [dataSource]="resume.education" class="mat-elevation-z1 full-width">
+      <ng-container matColumnDef="degree">
+        <th mat-header-cell *matHeaderCellDef>Degree</th>
+        <td mat-cell *matCellDef="let edu">{{ edu.degree }}</td>
+      </ng-container>
+      <ng-container matColumnDef="institution">
+        <th mat-header-cell *matHeaderCellDef>Institution</th>
+        <td mat-cell *matCellDef="let edu">{{ edu.institution }}</td>
+      </ng-container>
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef>Year</th>
+        <td mat-cell *matCellDef="let edu">{{ edu.year }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['degree', 'institution', 'year']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['degree', 'institution', 'year'];"></tr>
+    </table>
+  </section>
+
+  <section *ngIf="resume.experience?.length">
+    <h2>Experience</h2>
+    <table mat-table [dataSource]="resume.experience" class="mat-elevation-z1 full-width">
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let exp">{{ exp.role }}</td>
+      </ng-container>
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef>Company</th>
+        <td mat-cell *matCellDef="let exp">{{ exp.company }}</td>
+      </ng-container>
+      <ng-container matColumnDef="duration">
+        <th mat-header-cell *matHeaderCellDef>Duration</th>
+        <td mat-cell *matCellDef="let exp">{{ exp.duration }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['role', 'company', 'duration']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['role', 'company', 'duration'];"></tr>
+    </table>
+  </section>
+
+  <section *ngIf="resume.projects?.length">
+    <h2>Projects</h2>
+    <table mat-table [dataSource]="resume.projects" class="mat-elevation-z1 full-width">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let proj">{{ proj.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let proj">{{ proj.description }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['title', 'description']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['title', 'description'];"></tr>
+    </table>
+  </section>
+
+  <section *ngIf="resume.skills?.length">
+    <h2>Skills</h2>
+    <p>{{ resume.skills.join(', ') }}</p>
+  </section>
+</div>

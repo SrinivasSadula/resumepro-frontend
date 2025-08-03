@@ -7,6 +7,7 @@ import { Auth } from '../auth/auth';
 })
 export class ResumeService {
   private api = 'https://resumepro-backend-production.up.railway.app/'+'api/resume';
+  //private api = 'http://localhost:5000/'+'api/resume';
 
   constructor(private http: HttpClient, private auth: Auth) {}
 

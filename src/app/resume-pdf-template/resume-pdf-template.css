@@ -1,0 +1,28 @@
+.resume-container {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 30px;
+  color: #000;
+  width: 800px;
+}
+
+h1.name {
+  font-size: 28px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.contact {
+  margin: 5px 0 15px;
+  font-size: 14px;
+}
+
+h2 {
+  border-bottom: 1px solid #000;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+section {
+  margin-bottom: 15px;
+  font-size: 15px;
+}

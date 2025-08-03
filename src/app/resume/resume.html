@@ -1,84 +1,230 @@
 <!-- Modern centered resume UI with transparent card and grid system -->
 <div class="resume-bg">
   <div *ngIf="loading" class="custom-backdrop">
-    <mat-progress-spinner color="primary" mode="indeterminate" diameter="60">
-    </mat-progress-spinner>
+    <mat-progress-spinner color="primary" mode="indeterminate" diameter="60"></mat-progress-spinner>
   </div>
   <div class="resume-container">
-    <!-- <mat-card class="resume-card"> -->
     <div class="resume-grid">
       <div class="resume-header">
         <h2>Build Your Resume</h2>
       </div>
-      <form #resumeForm="ngForm" (ngSubmit)="saveResume()" class="resume-form" novalidate>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Name</mat-label>
-          <input matInput [(ngModel)]="resumeData.name" name="name" required #nameCtrl="ngModel" />
-          <mat-error *ngIf="nameCtrl.invalid && nameCtrl.touched">
-            Name is required.
-          </mat-error>
-        </mat-form-field>
+      <form #resumeForm="ngForm" (ngSubmit)="onSubmit(resumeForm)" class="resume-form">
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput [(ngModel)]="resumeData.email" name="email" required email #emailCtrl="ngModel" />
-          <mat-error *ngIf="emailCtrl.invalid && emailCtrl.touched">
-            Please enter a valid email address.
-          </mat-error>
-        </mat-form-field>
+        <!-- Personal Info Grid -->
+        <div class="row gx-3 gy-2">
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Name</mat-label>
+              <input matInput name="name" [(ngModel)]="resume.name" required #name="ngModel">
+              <mat-error *ngIf="name.invalid && name.touched">Name is required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput name="email" [(ngModel)]="resume.email" required email #email="ngModel">
+              <mat-error *ngIf="email.errors?.['required'] && email.touched">Email is required.</mat-error>
+              <mat-error *ngIf="email.errors?.['email'] && email.touched">Invalid email format.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Phone</mat-label>
+              <input matInput name="phone" [(ngModel)]="resume.phone" required pattern="^[6-9][0-9]{9}$"
+                #phone="ngModel" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
+              <mat-error *ngIf="phone.errors?.['required'] && phone.touched">Phone is required.</mat-error>
+              <mat-error *ngIf="phone.errors?.['pattern'] && phone.touched">Must be 10 digits, starting with
+                6-9.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Address</mat-label>
+              <textarea matInput name="address" [(ngModel)]="resume.address" required minlength="10"
+                #address="ngModel"></textarea>
+              <mat-error *ngIf="address.errors?.['required'] && address.touched">This is Required..</mat-error>
+              <mat-error *ngIf="address.errors?.['minlength'] && address.touched">Min 10 chars.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Summary</mat-label>
+              <textarea matInput name="summary" [(ngModel)]="resume.summary"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Phone</mat-label>
-          <input matInput [(ngModel)]="resumeData.phone" name="phone" required pattern="^[6-9][0-9]{9}$"
-            #phoneCtrl="ngModel" maxlength="10"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" />
-          <mat-error *ngIf="phoneCtrl.invalid && phoneCtrl.touched">
-            Please enter a valid mobile number.
-          </mat-error>
-        </mat-form-field>
+        <!-- <mat-divider class="section-divider"></mat-divider>
+        <h3 class="section-header">Summary</h3> -->
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Summary</mat-label>
-          <textarea matInput [(ngModel)]="resumeData.summary" name="summary" required #summaryCtrl="ngModel"></textarea>
-          <mat-error *ngIf="summaryCtrl.invalid && summaryCtrl.touched">
-            Summary is required.
-          </mat-error>
-        </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Education</mat-label>
-          <textarea matInput [(ngModel)]="resumeData.education" name="education" required
-            #educationCtrl="ngModel"></textarea>
-          <mat-error *ngIf="educationCtrl.invalid && educationCtrl.touched">
-            Education is required.
-          </mat-error>
-        </mat-form-field>
+        <mat-divider class="section-divider"></mat-divider>
+        <h3 class="section-header">Education</h3>
+        <div class="row gx-3 gy-2">
+          <div class="col-12">
+            <div cdkDropList (cdkDropListDropped)="drop($event, 'education')">
+              <div *ngFor="let edu of resume.education; let i = index" cdkDrag>
+                <div class="row gx-2 gy-1">
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Degree</mat-label>
+                      <input matInput name="degree{{i}}" [(ngModel)]="edu.degree" required #deg="ngModel">
+                      <mat-error *ngIf="deg.invalid && deg.touched">This is Required.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Institution</mat-label>
+                      <input matInput name="institution{{i}}" [(ngModel)]="edu.institution" required #inst="ngModel">
+                      <mat-error *ngIf="inst.invalid && inst.touched">This is Required.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Year</mat-label>
+                      <input matInput name="year{{i}}" [(ngModel)]="edu.year" pattern="^[0-9]{4}$" required
+                        #year="ngModel">
+                      <mat-error *ngIf="year.errors?.['required'] && year.touched">This is Required.</mat-error>
+                      <mat-error *ngIf="year.errors?.['pattern'] && year.touched">Enter valid year</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <button mat-icon-button color="warn" (click)="removeItem('education', i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="addItem('education')">Add Education</button>
+          </div>
+        </div>
 
+        <mat-divider class="section-divider"></mat-divider>
+        <h3 class="section-header">Experience</h3>
+        <div class="row gx-3 gy-2">
+          <div class="col-12">
+            <div cdkDropList (cdkDropListDropped)="drop($event, 'experience')">
+              <div *ngFor="let exp of resume.experience; let i = index" cdkDrag>
+                <div class="row gx-2 gy-1">
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Role</mat-label>
+                      <input matInput [(ngModel)]="exp.role" name="role{{i}}" required #role="ngModel">
+                      <mat-error *ngIf="role.invalid && role.touched">This is Required.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Company</mat-label>
+                      <input matInput [(ngModel)]="exp.company" name="company{{i}}" required #comp="ngModel">
+                      <mat-error *ngIf="comp.invalid && comp.touched">This is Required.</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Duration</mat-label>
+                      <input matInput [(ngModel)]="exp.duration" name="duration{{i}}">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <button mat-icon-button color="warn" (click)="removeItem('experience', i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="addItem('experience')">Add Experience</button>
+          </div>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+        <h3 class="section-header">Projects</h3>
+        <div class="row gx-3 gy-2">
+          <div class="col-12">
+            <div cdkDropList (cdkDropListDropped)="drop($event, 'projects')">
+              <div *ngFor="let proj of resume.projects; let i = index" cdkDrag>
+                <div class="row gx-2 gy-1">
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Title</mat-label>
+                      <input matInput [(ngModel)]="proj.title" name="title{{i}}" required #title="ngModel">
+                      <mat-error *ngIf="title.invalid && title.touched">This is Required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-4">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Description</mat-label>
+                      <textarea matInput [(ngModel)]="proj.description" name="description{{i}}"></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-3">
+                    <mat-form-field appearance="outline" class="full-width">
+                      <mat-label>Link</mat-label>
+                      <input matInput [(ngModel)]="proj.link" name="link{{i}}" type="url">
+                      <mat-error *ngIf="proj.link && !proj.link.startsWith('http')">Must start with http:// or
+                        https://
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <button mat-icon-button color="warn" (click)="removeItem('projects', i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <mat-divider></mat-divider>
+              </div>
+            </div>
+            <button mat-stroked-button (click)="addItem('projects')">Add Project</button>
+          </div>
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+        <h3 class="section-header">Skills</h3>
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Experience</mat-label>
-          <textarea matInput [(ngModel)]="resumeData.experience" name="experience" required
-            #experienceCtrl="ngModel"></textarea>
-          <mat-error *ngIf="experienceCtrl.invalid && experienceCtrl.touched">
-            Experience is required.
-          </mat-error>
+          <mat-label>Skills (comma separated)</mat-label>
+          <input matInput name="skills" [(ngModel)]="resume.skills" required>
         </mat-form-field>
 
         <div class="actions full-width">
           <button mat-raised-button color="primary" type="submit" class="resume-btn" [disabled]="resumeForm.invalid">
             Save Resume
           </button>
-          <button mat-raised-button color="accent" type="button" class="resume-btn" (click)="downloadPdf()">
+          <!-- <button mat-raised-button color="accent" type="button" class="resume-btn" (click)="downloadPdf()">
             Download PDF
-          </button>
-          <button mat-raised-button color="primary" type="button" class="resume-btn" (click)="payAndUnlockPremium()" *ngIf="!premiumStatus">
+          </button> -->
+          <button mat-raised-button color="primary" type="button" class="resume-btn" (click)="payAndUnlockPremium()"
+            *ngIf="!premiumStatus">
             Unlock Premium (₹99)
           </button>
         </div>
+
       </form>
+      <mat-divider class="section-divider"></mat-divider>
+      <h3 class="section-header">Select Template and Download</h3>
+      <!-- Template Select Buttons -->
+      <div class="row gx-3 gy-2">
+        <div class="col-12">
+          <div class="template-toolbar">
+            <div class="col-md-3">
+              <button mat-raised-button color="primary" type="button" class="resume-btn"
+                (click)="selectTemplate('classic',resume)" [disabled]="selectedTemplate === 'classic'">Classic</button>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button color="primary" type="button" class="resume-btn"
+                (click)="selectTemplate('modern',resume)" [disabled]="selectedTemplate === 'modern'">Modern</button>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button color="primary" type="button" class="resume-btn"
+                (click)="selectTemplate('minimal',resume)" [disabled]="selectedTemplate === 'minimal'">Minimal</button>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button color="primary" type="button" class="resume-btn"
+                (click)="selectTemplate('basic',resume)" [disabled]="selectedTemplate === 'basic'">Basic</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <p class="success" *ngIf="success">{{ success }}</p>
       <p class="error" *ngIf="error">{{ error }}</p>
     </div>
-    <!-- </mat-card> -->
-
   </div>
 </div>

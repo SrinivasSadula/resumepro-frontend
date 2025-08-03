@@ -24,22 +24,24 @@ export class Auth {
   }
 
   logout() {
-    localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.tokenKey);
     this.premiumStatus.next(false);
     this.router.navigate(['/login']);
   }
 
   saveToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
+    sessionStorage.setItem(this.tokenKey, token);
     const decoded = JSON.parse(atob(token.split('.')[1]));
     this.premiumStatus.next(decoded.isPremium);
   }
 
   getToken() {
-    return localStorage.getItem(this.tokenKey);
+    console.log('Retrieving token from sessionStorage', sessionStorage.getItem(this.tokenKey));
+    return sessionStorage.getItem(this.tokenKey);
   }
 
   isLoggedIn(): boolean {
+    console.log('Checking if user is logged in', !!this.getToken());
     return !!this.getToken();
   }
 

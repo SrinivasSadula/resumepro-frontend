@@ -1,0 +1,44 @@
+.modern-resume {
+  font-family: 'Roboto', sans-serif;
+  padding: 32px;
+  width: 800px;
+  background-color: #f9f9f9;
+  color: #2c3e50;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 5px;
+    color: #34495e;
+  }
+
+  p {
+    font-size: 14px;
+    color: #555;
+  }
+}
+
+h2 {
+  margin-top: 30px;
+  border-left: 5px solid #3498db;
+  padding-left: 10px;
+  color: #3498db;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #2c3e50;
+}
