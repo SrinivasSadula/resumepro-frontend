@@ -1,6 +1,46 @@
-# ResumeproFrontend
+# 📄 ResumePro – AI-Powered Resume Builder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+![Deployment](https://img.shields.io/badge/Live--Demo-Click%20Here-brightgreen)
+[🌐 Visit Live App](https://resumepro-frontend.vercel.app/#/landing)
+
+ResumePro is a modern resume builder SaaS platform built with Angular 20 and Node.js. It allows users to create, edit, preview, and download professional resumes with customizable templates and premium features.
+
+---
+
+## 🔥 Features
+
+| Feature | Description |
+|--------|-------------|
+| 🔐 **JWT Auth** | Signup & Login with secure token |
+| 📄 **Resume Builder** | Editable fields with drag & drop |
+| 🎨 **Template Switcher** | Classic / Modern / Minimal |
+| 🌗 **Dark/Light Mode** | System-detect + toggle switch |
+| 🎨 **Color & Font Picker** | Live resume customization |
+| 📥 **PDF Export** | Print-ready resume download (premium) |
+| 💳 **Razorpay Payments** | ₹99 Premium unlock with Razorpay |
+| 🖼️ **Live Preview** | Resume preview updates instantly |
+| 🧠 **Ready for AI integration** | Suggestion fields planned soon |
+
+---
+
+## 🚀 Tech Stack
+
+- **Frontend**: Angular 20, Angular Material, SCSS
+- **Backend**: Node.js, Express.js, MongoDB
+- **Payments**: Razorpay
+- **PDF Generation**: html2pdf.js
+- **Deployed On**: Vercel (Frontend) + Render (Backend)
+
+---
+
+## 📦 Installation (Frontend)
+
+```bash
+git clone https://github.com/SrinivasSadula/resume-enhancer-frontend.git
+cd resume-enhancer-frontend
+npm install
+ng serve
+```
 
 ## Development server
 
